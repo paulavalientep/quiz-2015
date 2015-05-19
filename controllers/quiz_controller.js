@@ -2,7 +2,7 @@ var models = require('../models/models.js');
 
 //GET /quizes/question
 
-exports.question = function(req, res) {
+exports.show = function(req, res) {
 	models.Quiz.findAll().success(function(quiz)){
 	
 		res.render('quizes/question', { pregunta: quiz[0].pregunta});	
@@ -20,3 +20,11 @@ exports.answer = function(req, res) {
 		}
 	})
 };
+
+exports.index = function(req, res){
+models.Quiz.findAll().then(function(quizes)){
+	
+		res.render('quizes/index.ejs', { quizes: quizes});	
+	})
+};
+
