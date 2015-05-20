@@ -16,12 +16,14 @@ exports.load = function(req, res, next, quizId){
 //GET /quizes
 
 exports.index = function(req, res){
-models.Quiz.findAll({where: ["pregunta like ?", search]}).then(
-	function(quizes){
-	
-		res.render('quizes/index.ejs', { quizes: quizes});	
-	}
-).catch(function(error) {next(error);})
+   if(req.query.search === undefined) {
+		models.Quiz.findAll().then(function(quizes) {
+		res.render('quizes/index.ejs', {quizes: quizes});
+	})} else {
+		models.Quiz.findAll({order:["pregunta"] ,where: ["pregunta like ?",'%'+req.query.search+'%']}).then(function(quizes){
+		res.render('quizes/index.ejs', {quizes: quizes });
+	})};
+  
 };
 
 //GET /quizes/:id
@@ -39,6 +41,27 @@ exports.answer = function(req, res) {
 		}
 	res.render('quizes/answer', {quiz:req.quiz, respuesta: resultado});
 	
+};
+
+//GET /quizes/new
+
+exports.new = function(req, res) {
+	var quiz = models.Quiz.build(//Crea objeto quiz
+			{ pregunta: "Pregunta", respuesta:"Respuesta"
+
+			}
+		);
+	res.render('quizes/new', {quiz:quiz});
+	
+};
+
+exports.create = function(req, res) {
+	var quiz = models.Quiz.build(req.body.quiz);
+	//Guarda en DB los campos pregunta y respuesta de quiz
+	quiz.save({fields:["Pregunta","Respuesta"]}).then(function(){
+																	res.redirect('/quizes');
+																}
+													 )	
 };
 
 

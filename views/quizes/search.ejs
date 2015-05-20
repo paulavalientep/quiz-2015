@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <form method="get" action="/quizes/answer">
+    </form>
+    <table>
+	<% var i; for(i=0; i < quizes.length; i++){ %>
+		<% if(quizes[i].pregunta.search(busqueda)){ %>	
+			<tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
+		<% } %>
+	<% } %>
+    </table>
+  </body>
+</html> 
