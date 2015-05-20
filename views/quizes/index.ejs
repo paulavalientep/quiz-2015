@@ -3,10 +3,20 @@
   <head>
     <title>Preguntas</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="icon" href="/home/paula.valientep/mis_proyectos/public/favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="/home/paula.valientep/mis_proyectos/quiz/public/favicon.ico" type="image/x-icon"/>
   </head>
   <body>
- 
+    <form method="get" action="/quizes">
+        Pregunta a buscar: <br>
+        <input type="text"
+               name="search"
+               value="texto a buscar"
+        /><br>
+        <input type="submit"
+               value="Enviar"
+        />
+    </form>
+
     <table>
 	<% var i; for (i=0; i < quizes.length; i++) { %>
 	<tr><td><a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
