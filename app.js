@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var partials = require('express-partials');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var sessionController = require('./controllers/session_controller');
 
 var routes = require('./routes/index');
 //var users = require('./routes/users');
@@ -39,6 +40,25 @@ app.use(function(req, res, next) {
     res.locals.session = req.session;
     next();
 });
+
+// auto-logout de sesión
+app.use(function(req,res,next) {
+    console.log("MW auto-logout: 'Ejecutándose'");
+    if(req.session.user) {
+        var currentTime = new Date().getTime();
+        var diferencia  = currentTime - req.session.user.tiempo;
+        if(diferencia > 120000) { //Solicitada transaccion HTTP en mas de 2min (120000ms=2min)
+               console.log("MW auto-logout: 'Destruyendo al usuario'");
+               sessionController.destroy(req,res);
+        }
+        else //transaccion HTTP en menos de 2min
+        {
+            req.session.user.tiempo = currentTime;
+        }
+    }
+    next();
+});
+
 
 app.use('/', routes);
 
