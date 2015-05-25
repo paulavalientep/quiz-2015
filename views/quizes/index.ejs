@@ -11,7 +11,7 @@
       <% var i; for (i=0; i < quizes.length; i++) { %>
     <tr>
       <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
-          <%if(session.user){%>
+          <%if(session.user){
             if(session.user.isAdmin||session.user.id === quizes[i].UserId){%>
 
             <td><a href="quizes/<%= quizes[i].id %>/edit"><button>editar</button></a></td>
@@ -27,12 +27,12 @@
     </tr>
     <% } %>
     </table>
-    <p/>
+   
       <%if(session.user){%>
-      <a href="/quizes/new"><button>Crear pregunta</button></a>
+      <p><a href="/quizes/new"><button>Crear pregunta</button></a></p>
     <%}%>
 
-
+<p>
     <form method="get" action="/quizes">
         Pregunta a buscar: <br>
         <input type="text"
@@ -43,7 +43,7 @@
                value="Enviar"
         />
     </form>
-
+</p>
     
 
  
