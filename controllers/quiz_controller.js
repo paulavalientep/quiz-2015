@@ -57,6 +57,12 @@ exports.index = function(req, res, next){
   
 };
 
+
+exports.creditos = function(req, res) {
+    res.render('quizes/creditos', { picture: '<img src="/nosotras.jpeg" width="100px">', errors:[]});  
+};
+
+
 //GET /quizes/:id
 
 exports.show = function(req, res) {

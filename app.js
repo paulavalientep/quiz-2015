@@ -32,6 +32,7 @@ app.use(partials());
 
 
 
+
 // auto-logout de sesión
 app.use(function(req,res,next) {
     console.log("MW auto-logout: 'Ejecutándose'");

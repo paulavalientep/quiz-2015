@@ -12,6 +12,8 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz', errors:[] });
 });
 
+
+
 //Autoload de comandos con :quizId
 
 router.param('quizId', quizController.load); //autoload :quizId
@@ -34,6 +36,7 @@ router.get('/user/:userId(\\d+)/quizes',  quizController.index);     //ver las p
 
 //Definición de las rutas de /quizes
 router.get('/quizes', quizController.index);
+router.get('/quizes/creditos', quizController.creditos);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
 router.get('/quizes/new', sessionController.loginRequired, quizController.new);
