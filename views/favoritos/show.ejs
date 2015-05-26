@@ -1,0 +1,29 @@
+<h2>Favoritos <span>de <%= session.user.username %></span></h2>
+
+<%
+if(quizes)
+{
+%>
+    <table>
+        <%
+        var i;
+        for (i = 0; i < quizes.length; i++)
+        {
+        %>
+            <tr>
+                <td>
+                    <a href="/quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
+                </td>
+                <td>
+                    <form method="post" action="/user/<%= session.user.id %>/favoritos/<%= quizes[i].id %>?_method=delete">
+                        <button class="checked" type="submit" onClick="return confirm('Eliminar: <%= quizes[i].pregunta %> de Favoritos');"></button>
+                    </form>
+                </td>
+            </tr>
+        <%
+        }
+        %>
+    </table>
+<%
+}
+%>

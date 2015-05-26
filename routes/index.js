@@ -5,6 +5,7 @@ var multer = require('multer');
 var quizController = require('../controllers/quiz_controller');
 var commentController = require('../controllers/comment_controller');
 var sessionController = require('../controllers/session_controller');
+var favoritosController = require('../controllers/favoritos_controller');
 var userController = require('../controllers/user_controller');
 
 /* GET home page. */
@@ -33,6 +34,12 @@ router.get('/user/:userId(\\d+)/edit',  sessionController.loginRequired, userCon
 router.put('/user/:userId(\\d+)',  sessionController.loginRequired, userController.ownershipRequired, userController.update);     // actualizar información de cuenta
 router.delete('/user/:userId(\\d+)',  sessionController.loginRequired,userController.ownershipRequired, userController.destroy);     // borrar cuenta
 router.get('/user/:userId(\\d+)/quizes',  quizController.index);     //ver las preguntas del usuario
+
+/* Definición de rutas de favoritos */
+// ver los favoritos de un usuario
+router.get('/user/:userId(\\d+)/favoritos',favoritosController.show);
+router.put('/user/:userId(\\d+)/favoritos/:quizId(\\d+)',sessionController.loginRequired,favoritosController.update);
+router.delete('/user/:userId(\\d+)/favoritos/:quizId(\\d+)',sessionController.loginRequired,favoritosController.destroy);
 
 //Definición de las rutas de /quizes
 router.get('/quizes', quizController.index);

@@ -1,5 +1,27 @@
 
-<%if(quiz.image){%>
+
+<%
+if(session.user)
+{
+    if(mark === 'unchecked')
+    {
+    %>
+        <form method="post" action="/user/<%= session.user.id %>/favourites/<%= quiz.id %>?_method=put">
+            <input class="unchecked" type="submit" value="" />
+        </form>
+    <%
+    }
+    if(mark === 'checked')
+    {
+    %>
+        <form method="post" action="/user/<%= session.user.id %>/favourites/<%= quiz.id %>?_method=delete">
+            <button class="checked" type="submit" onClick="return confirm('Eliminar: <%= quiz.pregunta %> de Favoritos');"></button>
+        </form>
+    <%
+    }
+}
+
+if(quiz.image){%>
 	<p><img class="quiz_img" src="/media/<%= quiz.image %>"></p>
 <%}%>
 

@@ -15,3 +15,19 @@ nav span             { margin: 0px 10px 0px 0px;
 .right {float: right;}
 
 .quiz_img {height: 150px; float:left;}
+.checked{
+	background-repeat : no-repeat;
+	width : 30px;
+	height : 30px;
+	display : block;
+	background-position: center center;
+	background-image : url("../images/star_yellow.png");
+}
+.unchecked{
+	background-repeat : no-repeat;
+	width : 30px;
+	height : 30px;
+	display : block;
+	background-position: center center;
+	background-image : url("../images/star_grey.png");
+}
